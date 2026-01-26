@@ -1,0 +1,55 @@
+/* Бүх хуудсын үндсэн тохиргоо */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #b7ddf2; /* baby blue */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+/* Асуулт */
+#valentineQuestion {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* Товчлуурууд */
+.answerButton {
+  font-size: 1.2rem;
+  padding: 12px 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Yes товч */
+.answerButton:first-of-type {
+  background-color: #6fbce6;
+  color: white;
+}
+
+/* No товч */
+#noButton {
+  background-color: #ff8fa3;
+  color: white;
+}
+
+/* Hover эффект */
+.answerButton:hover {
+  transform: scale(1.1);
+}
+
+/* Зураг */
+.responsive {
+  margin-top: 25px;
+  max-width: 80%;
+  height: auto;
+}
