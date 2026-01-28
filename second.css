@@ -1,0 +1,46 @@
+body {
+  background-color: #b7ddf2;
+  font-family: 'Bangers', cursive;
+  text-align: center;
+  padding: 20px;
+}
+
+#thankyou {
+  font-size: 4rem;
+  color: #2c3e50; /* Dark slate */
+  margin-top: 50px;
+}
+
+#rizz {
+  width: 300px;
+  margin: 20px 0;
+}
+
+.responsive {
+  max-width: 80%;
+  height: auto;
+}
+
+h1 {
+  font-family: 'Bangers', cursive;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.button {
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  padding: 15px 30px;
+  margin-top: 20px;
+  background-color: #ff8fa3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.1);
+  background-color: #ff6f81;
+}
