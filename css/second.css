@@ -6,9 +6,10 @@ body {
 }
 
 #thankyou {
-  font-size: 4rem;
-  margin-bottom: 10px;
+  font-size: 4.5rem;
+  letter-spacing: 3px;
 }
+
 
 h1 {
   font-size: 2.5rem;
