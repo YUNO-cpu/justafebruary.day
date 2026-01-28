@@ -2,25 +2,18 @@ body {
   background-color: #b7ddf2;
   font-family: 'Bangers', cursive;
   text-align: center;
-  padding: 20px;
 }
 
 #thankyou {
   color: #2c3e50;
-  font-family: 'Bangers', cursive;
   font-size: 4rem;
   margin-bottom: 10px;
 }
 
-
 h1 {
   color: #2c3e50;
-  font-family: 'Bangers', cursive;
   font-size: 2.5rem;
 }
-
-
-
 
 .responsive {
   max-width: 80%;
@@ -36,8 +29,6 @@ h1 {
   border-radius: 12px;
   background-color: #6fbce6;
   color: white;
-  cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
 .button:hover {
