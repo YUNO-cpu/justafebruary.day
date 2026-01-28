@@ -1,13 +1,12 @@
 body {
-  background-color: #b7ddf2; /* baby blue */
-  font-family: 'Bangers', cursive; /* Bangers font */
+  background-color: #b7ddf2;
+  font-family: 'Bangers', cursive;
   text-align: center;
-  padding: 50px 20px;
+  padding: 20px;
 }
 
-#thankyou {
-  font-size: 4rem;
-  color: #2c3e50; /* dark slate */
+h1, #thankyou {
+  color: #2c3e50;
   margin-bottom: 30px;
 }
 
@@ -17,18 +16,13 @@ body {
   margin: 20px 0;
 }
 
-h1 {
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
 .button {
   font-family: 'Bangers', cursive;
   font-size: 1.5rem;
   padding: 12px 30px;
   border: none;
   border-radius: 12px;
-  background-color: #6fbce6; /* light blue button */
+  background-color: #6fbce6;
   color: white;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -36,5 +30,32 @@ h1 {
 
 .button:hover {
   transform: scale(1.1);
+}
+
+#gameBoard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.card {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card.flipped {
+  transform: scale(1.2);
+}
+
+#confettiCanvas {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
