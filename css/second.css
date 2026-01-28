@@ -6,9 +6,11 @@ body {
 }
 
 h1, #thankyou {
-  color: #2c3e50;
-  margin-bottom: 30px;
+  position: static; /* default */
+  font-size: 4rem;
+  margin-bottom: 20px;
 }
+
 
 .responsive {
   max-width: 80%;
