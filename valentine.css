@@ -14,10 +14,11 @@ body {
 
 /* Асуулт */
 #valentineQuestion {
-  font-family: "Pacifico", cursive; /* cute font */
-  font-size: 3rem;
+  font-family: 'Bangers', cursive; /* Bangers font */
+  font-size: 3rem;  /* эхлээд том */
   color: #e91e63;
   margin: 20px 0 40px 0;
+  text-align: center;
 }
 
 /* Товчлуурууд нэг эгнээнд */
