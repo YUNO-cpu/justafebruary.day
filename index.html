@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Just a February Site</title>
-    <link rel="stylesheet" href="valentine.css" />
-    <!-- Bangers font -->
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="valentineQuestion">Will you be my valentine?</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just a February Site</title>
+  <link rel="stylesheet" href="valentine.css" />
+  <!-- Bangers font -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+</head>
+<body>
 
-    <div class="buttonGroup">
-      <button class="answerButton" id="yesButton" onclick="location.href='thankyou.html'">Yes</button>
-      <button class="answerButton" id="noButton">NO</button>
-    </div>
+  <!-- Асуулт -->
+  <div id="valentineQuestion">Will you be my valentine?</div>
 
-    <img src="please.png" alt="cat asking question" class="responsive" />
+  <!-- YES / NO товч -->
+  <div class="buttonGroup">
+    <button class="answerButton" id="yesButton" onclick="yayConfetti()">Yes</button>
+    <button class="answerButton" id="noButton">NO</button>
+  </div>
 
-    <script>
-      const noButton = document.getElementById("noButton");
-      const yesButton = document.getElementById("yesButton");
+  <!-- Зураг -->
+  <img src="please.png" alt="cat asking question" class="responsive" />
 
-      // NO товч mouse-over дээр зугтах
-      noButton.addEventListener("mouseover", () => {
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 100 - 50;
-        noButton.style.transform = `translate(${x}px, ${y}px)`;
+  <!-- Canvas for confetti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const noButton = document.getElementById("noButton");
+    const yesButton = document.getElementById("yesButton");
+
+    // NO товч smooth зугтана
+    noButton.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 100 - 50;
+      noButton.style.transition = "transform 0.3s ease";
+      noButton.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // NO товч click → YES томорно
+    noButton.addEventListener("click", () => {
+      let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+      yesButton.style.fontSize = currentFontSize + 10 + "px";
+    });
+
+    // YES товч click → confetti
+    function yayConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
       });
+      // Дараа нь thankyou.html руу очно
+      setTimeout(() => {
+        location.href = "thankyou.html";
+      }, 1000);
+    }
+  </script>
 
-      // NO товч дарахад YES товч томорно
-      noButton.addEventListener("click", () => {
-        let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
-        yesButton.style.fontSize = currentFontSize + 10 + "px";
-      });
-    </script>
-  </body>
+</body>
 </html>
 
