@@ -14,7 +14,7 @@ body {
 
 /* Асуулт */
 #valentineQuestion {
-  font-family: "Pacifico", cursive;
+  font-family: "Pacifico", cursive; /* cute font */
   font-size: 3rem;
   color: #e91e63;
   margin: 20px 0 40px 0;
@@ -39,7 +39,7 @@ body {
 }
 
 /* YES товч */
-.answerButton:first-of-type {
+#yesButton {
   background-color: #6fbce6;
   color: white;
 }
@@ -50,8 +50,8 @@ body {
   color: white;
 }
 
-/* Hover эффект YES товч дээр */
-.answerButton:first-of-type:hover {
+/* Hover эффект зөвхөн YES товч дээр */
+#yesButton:hover {
   transform: scale(1.1);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
@@ -62,4 +62,3 @@ body {
   max-width: 80%;
   height: auto;
 }
-
