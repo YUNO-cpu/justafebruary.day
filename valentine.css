@@ -12,31 +12,37 @@ body {
   text-align: center;
 }
 
+/* Асуулт */
 #valentineQuestion {
-  font-size: 2.8rem;
-  color: #2c3e50;
-  margin-bottom: 40px;
-  margin-top: 20px;
+  font-family: "Pacifico", cursive; /* cute Valentine font */
+  font-size: 3rem;
+  color: #e91e63; /* pink */
+  margin: 20px 0 40px 0;
+}
+
+/* Товчлуурууд нэг эгнээнд */
+.buttonGroup {
+  display: flex;
+  gap: 20px;
 }
 
 /* Товчлуурууд */
 .answerButton {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   padding: 12px 30px;
-  margin: 10px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* Yes товч */
+/* YES товч */
 .answerButton:first-of-type {
   background-color: #6fbce6;
   color: white;
 }
 
-/* No товч */
+/* NO товч */
 #noButton {
   background-color: #ff8fa3;
   color: white;
@@ -45,6 +51,7 @@ body {
 /* Hover эффект */
 .answerButton:hover {
   transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* Зураг */
@@ -53,3 +60,4 @@ body {
   max-width: 80%;
   height: auto;
 }
+
