@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentine Game</title>
-  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/second.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>Find the matching hearts 💖</h1>
   <div id="gameBoard">
-    <!-- 18 хос (36 карт) -->
+    <!-- 18 хос = 36 карт -->
     <img src="heart1.png" class="card" data-pair="1">
     <img src="heart1.png" class="card" data-pair="1">
     <img src="heart2.png" class="card" data-pair="2">
@@ -56,7 +55,7 @@
     const gameBoard = document.getElementById("gameBoard");
     const cards = Array.from(document.querySelectorAll(".card"));
 
-    // Shuffle cards
+    // Shuffle
     cards.sort(() => Math.random() - 0.5);
     cards.forEach(card => gameBoard.appendChild(card));
 
