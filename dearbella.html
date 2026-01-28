@@ -11,18 +11,55 @@
 <body>
   <h1>Find the matching hearts 💖</h1>
   <div id="gameBoard">
+    <!-- 18 хос (36 карт) -->
+    <img src="heart1.png" class="card" data-pair="1">
     <img src="heart1.png" class="card" data-pair="1">
     <img src="heart2.png" class="card" data-pair="2">
-    <img src="heart3.png" class="card" data-pair="3">
-    <img src="heart1.png" class="card" data-pair="1">
     <img src="heart2.png" class="card" data-pair="2">
     <img src="heart3.png" class="card" data-pair="3">
+    <img src="heart3.png" class="card" data-pair="3">
+    <img src="heart4.png" class="card" data-pair="4">
+    <img src="heart4.png" class="card" data-pair="4">
+    <img src="heart5.png" class="card" data-pair="5">
+    <img src="heart5.png" class="card" data-pair="5">
+    <img src="heart6.png" class="card" data-pair="6">
+    <img src="heart6.png" class="card" data-pair="6">
+    <img src="heart7.png" class="card" data-pair="7">
+    <img src="heart7.png" class="card" data-pair="7">
+    <img src="heart8.png" class="card" data-pair="8">
+    <img src="heart8.png" class="card" data-pair="8">
+    <img src="heart9.png" class="card" data-pair="9">
+    <img src="heart9.png" class="card" data-pair="9">
+    <img src="heart10.png" class="card" data-pair="10">
+    <img src="heart10.png" class="card" data-pair="10">
+    <img src="heart11.png" class="card" data-pair="11">
+    <img src="heart11.png" class="card" data-pair="11">
+    <img src="heart12.png" class="card" data-pair="12">
+    <img src="heart12.png" class="card" data-pair="12">
+    <img src="heart13.png" class="card" data-pair="13">
+    <img src="heart13.png" class="card" data-pair="13">
+    <img src="heart14.png" class="card" data-pair="14">
+    <img src="heart14.png" class="card" data-pair="14">
+    <img src="heart15.png" class="card" data-pair="15">
+    <img src="heart15.png" class="card" data-pair="15">
+    <img src="heart16.png" class="card" data-pair="16">
+    <img src="heart16.png" class="card" data-pair="16">
+    <img src="heart17.png" class="card" data-pair="17">
+    <img src="heart17.png" class="card" data-pair="17">
+    <img src="heart18.png" class="card" data-pair="18">
+    <img src="heart18.png" class="card" data-pair="18">
   </div>
 
   <canvas id="confettiCanvas"></canvas>
 
   <script>
-    const cards = document.querySelectorAll(".card");
+    const gameBoard = document.getElementById("gameBoard");
+    const cards = Array.from(document.querySelectorAll(".card"));
+
+    // Shuffle cards
+    cards.sort(() => Math.random() - 0.5);
+    cards.forEach(card => gameBoard.appendChild(card));
+
     let firstCard = null;
     let secondCard = null;
     let lockBoard = false;
@@ -40,7 +77,6 @@
 
         secondCard = card;
 
-        // check match
         if(firstCard.dataset.pair === secondCard.dataset.pair) {
           confetti({
             particleCount: 50,
