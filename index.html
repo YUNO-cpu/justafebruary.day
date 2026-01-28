@@ -24,10 +24,20 @@
 
     <!-- JavaScript -->
     <script>
-      document.getElementById("noButton").addEventListener("click", function () {
-        var yesButton = document.querySelector('button[onclick*="thankyou.html"]');
-        var currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
-        yesButton.style.fontSize = currentFontSize + 10 + "px"; // YES товч томорно
+      const noButton = document.getElementById("noButton");
+      const yesButton = document.querySelector('button[onclick*="thankyou.html"]');
+
+      noButton.addEventListener("click", () => {
+        // YES товч томорно
+        let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+        yesButton.style.fontSize = currentFontSize + 10 + "px";
+      });
+
+      // NO товч зугтаах effect
+      noButton.addEventListener("mouseover", () => {
+        const x = Math.random() * 200 - 100; // -100 ~ +100 px
+        const y = Math.random() * 100 - 50;  // -50 ~ +50 px
+        noButton.style.transform = `translate(${x}px, ${y}px)`;
       });
     </script>
   </body>
