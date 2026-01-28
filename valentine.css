@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #b7ddf2; /* baby blue */
+  background-color: #b7ddf2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,9 +14,9 @@ body {
 
 /* Асуулт */
 #valentineQuestion {
-  font-family: "Pacifico", cursive; /* cute Valentine font */
+  font-family: "Pacifico", cursive;
   font-size: 3rem;
-  color: #e91e63; /* pink */
+  color: #e91e63;
   margin: 20px 0 40px 0;
 }
 
@@ -24,6 +24,7 @@ body {
 .buttonGroup {
   display: flex;
   gap: 20px;
+  position: relative;
 }
 
 /* Товчлуурууд */
@@ -34,6 +35,7 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 /* YES товч */
@@ -48,8 +50,8 @@ body {
   color: white;
 }
 
-/* Hover эффект */
-.answerButton:hover {
+/* Hover эффект YES товч дээр */
+.answerButton:first-of-type:hover {
   transform: scale(1.1);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
