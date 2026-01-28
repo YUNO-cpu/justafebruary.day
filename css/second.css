@@ -5,11 +5,16 @@ body {
   padding: 20px;
 }
 
-h1, #thankyou {
-  position: static; /* default */
+#thankyou {
   font-size: 4rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 30px;
+}
+
 
 
 .responsive {
