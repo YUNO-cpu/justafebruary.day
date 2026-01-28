@@ -1,24 +1,22 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 20px; /* бага padding нэмэх */
   min-height: 100vh;
-  background-color: #b7ddf2; /* baby blue */
+  background-color: #b7ddf2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 60px;
-  font-family: "Arial", sans-serif;
+  justify-content: flex-start; /* төв биш, дээшээс эхлэх */
+  font-family: "Bangers", cursive;
   text-align: center;
-  overflow: hidden; /* confetti canvas-д саад болохгүй */
 }
 
 /* Асуулт */
 #valentineQuestion {
   font-family: 'Bangers', cursive;
-  font-size: 3rem;
+  font-size: 2.2rem;
   color: #2c3e50; /* dark slate */
-  margin: 20px 0 40px 0;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -60,7 +58,7 @@ body {
 
 /* Зураг */
 .responsive {
-  margin-top: 25px;
+  margin-top: 20px;
   max-width: 80%;
   height: auto;
 }
