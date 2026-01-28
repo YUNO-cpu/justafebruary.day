@@ -15,7 +15,7 @@
 
     <!-- YES / NO товч -->
     <div class="buttonGroup">
-      <button class="answerButton" onclick="location.href='thankyou.html'">Yes</button>
+      <button class="answerButton" id="yesButton" onclick="location.href='thankyou.html'">Yes</button>
       <button class="answerButton" id="noButton">NO</button>
     </div>
 
@@ -25,20 +25,21 @@
     <!-- JavaScript -->
     <script>
       const noButton = document.getElementById("noButton");
-      const yesButton = document.querySelector('button[onclick*="thankyou.html"]');
+      const yesButton = document.getElementById("yesButton");
 
-      noButton.addEventListener("click", () => {
-        // YES товч томорно
-        let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
-        yesButton.style.fontSize = currentFontSize + 10 + "px";
-      });
-
-      // NO товч зугтаах effect
+      // NO товч дээр mouse ирэхэд зугтах
       noButton.addEventListener("mouseover", () => {
         const x = Math.random() * 200 - 100; // -100 ~ +100 px
         const y = Math.random() * 100 - 50;  // -50 ~ +50 px
         noButton.style.transform = `translate(${x}px, ${y}px)`;
       });
+
+      // NO товч дарахад YES товч томорно
+      noButton.addEventListener("click", () => {
+        let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+        yesButton.style.fontSize = currentFontSize + 10 + "px";
+      });
     </script>
   </body>
 </html>
+
