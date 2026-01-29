@@ -63,3 +63,9 @@ h1 {
   z-index: 999;
 }
 
+a.button {
+  text-decoration: none !important;
+  display: inline-block;
+}
+
+
