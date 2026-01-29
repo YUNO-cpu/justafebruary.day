@@ -5,19 +5,68 @@
   <title>Drag & Heart Game</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/second.css">
+  <style>
+    /* Game board styling */
+    #gameBoard {
+      display: grid;
+      grid-template-columns: repeat(6, 100px);
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      perspective: 600px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .card.flipped img {
+      transform: rotateY(180deg) scale(1.1);
+    }
+
+    .card.matched img {
+      box-shadow: 0 0 20px #ff4f81;
+    }
+
+    #heartCanvas {
+      position: fixed;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+  </style>
 </head>
 <body>
 
   <h1>Match the Pictures!</h1>
 
-  <!-- Canvas for heart animation -->
   <canvas id="heartCanvas"></canvas>
 
-  <!-- Game board -->
   <div id="gameBoard"></div>
 
+  <!-- Heart sound -->
+  <audio id="heartSound">
+    <source src="heart.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-  /* ===== Canvas setup ===== */
+  // ===== Heart Canvas =====
   const canvas = document.getElementById("heartCanvas");
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
@@ -27,7 +76,7 @@
   const heartImages = [];
   for(let i=1;i<=36;i++){
     const img = new Image();
-    img.src = `images/heart${i}.png`; // images/heart1.png ... heart36.png
+    img.src = `images/heart${i}.png`; 
     heartImages.push(img);
   }
 
@@ -68,18 +117,21 @@
   }
 
   createHearts();
+  canvas.style.opacity = 0.7;
   animateHearts();
 
-  /* ===== Game Board (36 cards / 18 pairs) ===== */
+  // ===== Game Board (36 cards / 18 pairs) =====
   const gameBoard = document.getElementById("gameBoard");
-  const totalPairs = 18; // 18 хос = 36 карт
+  const totalPairs = 18; 
   const selectedImages = heartImages.slice(0,totalPairs); 
-  const cardsArray = [...selectedImages,...selectedImages]; // duplicate for pairs
+  const cardsArray = [...selectedImages,...selectedImages]; 
   shuffle(cardsArray);
 
   let firstCard = null;
   let secondCard = null;
   let lockBoard = false;
+
+  const heartSound = document.getElementById("heartSound");
 
   function shuffle(array){
     for(let i=array.length-1;i>0;i--){
@@ -93,5 +145,49 @@
     card.classList.add("card");
     const image=document.createElement("img");
     image.src=img.src;
-    image.style.visibility="hid
+    image.style.visibility="hidden";
+    card.appendChild(image);
+    gameBoard.appendChild(card);
+
+    card.addEventListener("click",()=>{
+      if(lockBoard) return;
+      if(card===firstCard) return;
+
+      // Play heart sound
+      heartSound.currentTime = 0;
+      heartSound.play();
+
+      image.style.visibility="visible";
+      card.classList.add("flipped");
+
+      if(!firstCard){
+        firstCard=card;
+      } else {
+        secondCard=card;
+        lockBoard=true;
+
+        if(firstCard.querySelector("img").src===secondCard.querySelector("img").src){
+          firstCard.classList.add("matched");
+          secondCard.classList.add("matched");
+          resetBoard();
+        } else {
+          setTimeout(()=>{
+            firstCard.querySelector("img").style.visibility="hidden";
+            secondCard.querySelector("img").style.visibility="hidden";
+            firstCard.classList.remove("flipped");
+            secondCard.classList.remove("flipped");
+            resetBoard();
+          },800);
+        }
+      }
+    });
+  });
+
+  function resetBoard(){
+    [firstCard,secondCard,lockBoard]=[null,null,false];
+  }
+  </script>
+
+</body>
+</html>
 
