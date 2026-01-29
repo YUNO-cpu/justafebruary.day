@@ -36,18 +36,58 @@
 
   <!-- Heart animation -->
 
-  <script>
+ <script>
+/* ===== canvas setup ===== */
 const canvas = document.getElementById("confettiCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const sound = document.getElementById("heartSound");
 let hearts = [];
+let audioCtx;
 
+/* ===== 1. sound (file хэрэггүй) ===== */
+function playHeartbeat() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.25);
+}
+
+/* ===== 2. startLove (CLICK ДАРАХАД) ===== */
 function startLove() {
-  sound.play();
+  playHeartbeat();        // 🔊 sound
+  startVibration();       // 📳 mobile vibration
+  createHearts();         // ❤️ зүрх
+  animateHearts();
 
+  // ⏱ 2 секундийн дараа дараагийн хуудас
+  setTimeout(() => {
+    window.location.href = "dearbella.html";
+  }, 2000);
+}
+
+/* ===== vibration ===== */
+function startVibration() {
+  if (navigator.vibrate) {
+    navigator.vibrate([100, 50, 100]);
+  }
+}
+
+/* ===== hearts ===== */
+function createHearts() {
   hearts = [];
   for (let i = 0; i < 60; i++) {
     hearts.push({
@@ -60,13 +100,6 @@ function startLove() {
       opacity: Math.random()
     });
   }
-
-  animateHearts();
-
-  // ⏱ 2 секундийн дараа дараагийн хуудас
-  setTimeout(() => {
-    window.location.href = "dearbella.html";
-  }, 2000);
 }
 
 function drawHeart(x, y, size, opacity) {
@@ -87,7 +120,7 @@ function animateHearts() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   hearts.forEach(h => {
     h.angle += 0.05;
-    h.x += Math.sin(h.angle) * h.sway; // 🫶 баруун зүүн савлах
+    h.x += Math.sin(h.angle) * h.sway; // ↔️ баруун зүүн савлах
     h.y += h.speed;
     drawHeart(h.x, h.y, h.size, h.opacity);
   });
