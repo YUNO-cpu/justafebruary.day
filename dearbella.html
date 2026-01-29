@@ -5,90 +5,108 @@
 <title>Drag & Heart Game</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 <style>
-  body {
-    background-color: #b7ddf2;
-    font-family: 'Bangers', cursive;
-    text-align: center;
-  }
+body {
+  background-color: #b7ddf2;
+  font-family: 'Bangers', cursive;
+  text-align: center;
+}
 
-  h1 {
-    color: #2c3e50;
-    font-size: 2.5rem;
-    margin-top: 20px;
-  }
+h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-top: 20px;
+}
 
-  #gameBoard {
-    display: grid;
-    grid-template-columns: repeat(6, 100px);
-    gap: 15px;
-    justify-content: center;
-    margin-top: 20px;
-  }
+#gameBoard {
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-  .card {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    perspective: 600px;
-  }
+.card {
+  width: 100px;
+  height: 100px;
+  perspective: 800px;
+  cursor: pointer;
+}
 
-  .card img {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  }
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
 
-  .card.flipped img {
-    transform: rotateY(180deg) scale(1.1);
-  }
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
 
-  .card.matched img {
-    box-shadow: 0 0 20px #ff4f81;
-  }
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+}
 
-  #heartCanvas {
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.7;
-  }
+.card-front {
+  background-color: #ffb6c1; /* арын өнгө */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.card-back img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.card.matched .card-back {
+  box-shadow: 0 0 20px #ff4f81;
+}
+
+#heartCanvas {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
 </style>
 </head>
 <body>
 
 <h1>Match the Pictures!</h1>
-
 <canvas id="heartCanvas"></canvas>
 <div id="gameBoard"></div>
 
-<!-- Heart sound -->
 <audio id="heartSound">
   <source src="heart.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// ===== Canvas Hearts =====
+// ===== Heart Canvas =====
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const heartsCanvasImages = [];
+let heartsCanvasImages = [];
 for(let i=1;i<=18;i++){
   const img = new Image();
   img.src = `images/heart${i}.png`;
   heartsCanvasImages.push(img);
 }
 
-let hearts = [];
-function createHearts(){
+function createHearts() {
   hearts = [];
   for(let i=0;i<18;i++){
     hearts.push({
@@ -131,7 +149,6 @@ animateHearts();
 const gameBoard = document.getElementById("gameBoard");
 const heartSound = document.getElementById("heartSound");
 
-// 18 unique images
 const heartImages = [];
 for(let i=1;i<=18;i++){
   const img = new Image();
@@ -139,7 +156,6 @@ for(let i=1;i<=18;i++){
   heartImages.push(img);
 }
 
-// 36 cards (2 хос)
 let cardsArray = [...heartImages, ...heartImages];
 shuffle(cardsArray);
 
@@ -150,21 +166,32 @@ let lockBoard = false;
 cardsArray.forEach(img=>{
   const card = document.createElement("div");
   card.classList.add("card");
+
+  const inner = document.createElement("div");
+  inner.classList.add("card-inner");
+
+  const front = document.createElement("div");
+  front.classList.add("card-front");
+  front.textContent = "?";
+
+  const back = document.createElement("div");
+  back.classList.add("card-back");
   const image = document.createElement("img");
   image.src = img.src;
-  image.style.visibility = "hidden";
-  card.appendChild(image);
+  back.appendChild(image);
+
+  inner.appendChild(front);
+  inner.appendChild(back);
+  card.appendChild(inner);
   gameBoard.appendChild(card);
 
   card.addEventListener("click", ()=>{
     if(lockBoard) return;
     if(card===firstCard) return;
 
-    // Play sound
     heartSound.currentTime = 0;
     heartSound.play();
 
-    image.style.visibility = "visible";
     card.classList.add("flipped");
 
     if(!firstCard){
@@ -173,14 +200,15 @@ cardsArray.forEach(img=>{
       secondCard = card;
       lockBoard = true;
 
-      if(firstCard.querySelector("img").src === secondCard.querySelector("img").src){
+      const firstImg = firstCard.querySelector(".card-back img").src;
+      const secondImg = secondCard.querySelector(".card-back img").src;
+
+      if(firstImg === secondImg){
         firstCard.classList.add("matched");
         secondCard.classList.add("matched");
         resetBoard();
       } else {
         setTimeout(()=>{
-          firstCard.querySelector("img").style.visibility = "hidden";
-          secondCard.querySelector("img").style.visibility = "hidden";
           firstCard.classList.remove("flipped");
           secondCard.classList.remove("flipped");
           resetBoard();
@@ -201,7 +229,6 @@ function shuffle(array){
   }
 }
 </script>
-
 </body>
 </html>
-}
+
