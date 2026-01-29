@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Drag & Heart Game</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #b7ddf2;
-      font-family: 'Bangers', cursive;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>Drag & Heart Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<style>
+  body {
+    background-color: #b7ddf2;
+    font-family: 'Bangers', cursive;
+    text-align: center;
+  }
 
-    h1 {
-      color: #2c3e50;
-      font-size: 2.5rem;
-      margin-top: 20px;
-    }
+  h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-top: 20px;
+  }
 
-    #gameBoard {
-      display: grid;
-      grid-template-columns: repeat(6, 100px);
-      gap: 15px;
-      justify-content: center;
-      margin-top: 20px;
-    }
+  #gameBoard {
+    display: grid;
+    grid-template-columns: repeat(6, 100px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+  }
 
-    .card {
-      width: 100px;
-      height: 100px;
-      cursor: pointer;
-      perspective: 600px;
-    }
+  .card {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    perspective: 600px;
+  }
 
-    .card img {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      transform-style: preserve-3d;
-      transition: transform 0.5s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
+  .card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
 
-    .card.flipped img {
-      transform: rotateY(180deg) scale(1.1);
-    }
+  .card.flipped img {
+    transform: rotateY(180deg) scale(1.1);
+  }
 
-    .card.matched img {
-      box-shadow: 0 0 20px #ff4f81;
-    }
+  .card.matched img {
+    box-shadow: 0 0 20px #ff4f81;
+  }
 
-    #heartCanvas {
-      position: fixed;
-      top:0;
-      left:0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.7;
-    }
-  </style>
+  #heartCanvas {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+</style>
 </head>
 <body>
 
 <h1>Match the Pictures!</h1>
 
 <canvas id="heartCanvas"></canvas>
-
 <div id="gameBoard"></div>
 
 <!-- Heart sound -->
@@ -75,7 +74,7 @@
 </audio>
 
 <script>
-/* ===== Heart Canvas ===== */
+// ===== Canvas Hearts =====
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -84,12 +83,12 @@ canvas.height = window.innerHeight;
 const heartsCanvasImages = [];
 for(let i=1;i<=18;i++){
   const img = new Image();
-  img.src = `images/heart${i}.png`; // .jpg эсвэл .png бол зөв
+  img.src = `images/heart${i}.png`;
   heartsCanvasImages.push(img);
 }
 
 let hearts = [];
-function createHearts() {
+function createHearts(){
   hearts = [];
   for(let i=0;i<18;i++){
     hearts.push({
@@ -128,11 +127,11 @@ function animateHearts(){
 createHearts();
 animateHearts();
 
-/* ===== Game Board ===== */
+// ===== Game Board =====
 const gameBoard = document.getElementById("gameBoard");
 const heartSound = document.getElementById("heartSound");
 
-// 36 карт = 18 хос
+// 18 unique images
 const heartImages = [];
 for(let i=1;i<=18;i++){
   const img = new Image();
@@ -140,7 +139,8 @@ for(let i=1;i<=18;i++){
   heartImages.push(img);
 }
 
-let cardsArray = [...heartImages, ...heartImages]; // 36 карт
+// 36 cards (2 хос)
+let cardsArray = [...heartImages, ...heartImages];
 shuffle(cardsArray);
 
 let firstCard = null;
@@ -152,7 +152,7 @@ cardsArray.forEach(img=>{
   card.classList.add("card");
   const image = document.createElement("img");
   image.src = img.src;
-  image.style.visibility="hidden";
+  image.style.visibility = "hidden";
   card.appendChild(image);
   gameBoard.appendChild(card);
 
@@ -160,7 +160,7 @@ cardsArray.forEach(img=>{
     if(lockBoard) return;
     if(card===firstCard) return;
 
-    // Play heart sound
+    // Play sound
     heartSound.currentTime = 0;
     heartSound.play();
 
@@ -194,15 +194,14 @@ function resetBoard(){
   [firstCard, secondCard, lockBoard] = [null, null, false];
 }
 
-// Shuffle function
 function shuffle(array){
   for(let i=array.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
-    [array[i],array[j]] = [array[j],array[i]];
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
 </script>
 
 </body>
 </html>
-
+}
