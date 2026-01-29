@@ -30,9 +30,9 @@
 </audio>
 
   <!-- Button -->
-  <a href="dearbella.html" class="button" onclick="startHearts()">
-    Click here to make me your aashtai zaluu.
-  </a>
+<a class="button" onclick="startLove()">
+  Click here to make me your aashtai zaluu.
+</a>
 
   <!-- Heart animation -->
   <script>
@@ -84,6 +84,65 @@
       requestAnimationFrame(animateHearts);
     }
   </script>
+
+  <script>
+const canvas = document.getElementById("confettiCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const sound = document.getElementById("heartSound");
+let hearts = [];
+
+function startLove() {
+  sound.play();
+
+  hearts = [];
+  for (let i = 0; i < 60; i++) {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      size: Math.random() * 14 + 10,
+      speed: Math.random() * 2 + 1,
+      sway: Math.random() * 2 + 1,
+      angle: Math.random() * Math.PI * 2,
+      opacity: Math.random()
+    });
+  }
+
+  animateHearts();
+
+  // ⏱ 2 секундийн дараа дараагийн хуудас
+  setTimeout(() => {
+    window.location.href = "dearbella.html";
+  }, 2000);
+}
+
+function drawHeart(x, y, size, opacity) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(size / 30, size / 30);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.bezierCurveTo(-15, -15, -30, 10, 0, 30);
+  ctx.bezierCurveTo(30, 10, 15, -15, 0, 0);
+  ctx.closePath();
+  ctx.fillStyle = `rgba(255,80,120,${opacity})`;
+  ctx.fill();
+  ctx.restore();
+}
+
+function animateHearts() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hearts.forEach(h => {
+    h.angle += 0.05;
+    h.x += Math.sin(h.angle) * h.sway; // 🫶 баруун зүүн савлах
+    h.y += h.speed;
+    drawHeart(h.x, h.y, h.size, h.opacity);
+  });
+  requestAnimationFrame(animateHearts);
+}
+</script>
 
 </body>
 </html>
