@@ -35,55 +35,6 @@
 </a>
 
   <!-- Heart animation -->
-  <script>
-    const canvas = document.getElementById("confettiCanvas");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let hearts = [];
-
-    function startHearts() {
-      hearts = [];
-      for (let i = 0; i < 80; i++) {
-        hearts.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * -canvas.height,
-          size: Math.random() * 15 + 10,
-          speed: Math.random() * 2 + 1,
-          opacity: Math.random()
-        });
-      }
-      animateHearts();
-    }
-
-    function drawHeart(x, y, size, opacity) {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.scale(size / 30, size / 30);
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.bezierCurveTo(-15, -15, -30, 10, 0, 30);
-      ctx.bezierCurveTo(30, 10, 15, -15, 0, 0);
-      ctx.closePath();
-      ctx.fillStyle = `rgba(255, 80, 120, ${opacity})`;
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function animateHearts() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      hearts.forEach(h => {
-        drawHeart(h.x, h.y, h.size, h.opacity);
-        h.y += h.speed;
-        if (h.y > canvas.height + 50) {
-          h.y = -50;
-        }
-      });
-      requestAnimationFrame(animateHearts);
-    }
-  </script>
 
   <script>
 const canvas = document.getElementById("confettiCanvas");
