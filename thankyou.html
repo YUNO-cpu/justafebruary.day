@@ -1,132 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Thank you</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/second.css">
+<meta charset="UTF-8">
+<title>Thank You</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/game.css">
+<style>
+  #thankyou { color: #2c3e50; font-size: 4rem; margin-bottom: 10px; }
+  h1 { color: #2c3e50; font-size: 2.5rem; margin-bottom: 20px; }
+  a.button { text-decoration: none; display: inline-block; font-family: 'Bangers', cursive; font-size: 1.5rem; padding: 12px 30px; border-radius: 12px; background-color:#6fbce6; color:white; cursor:pointer; }
+  a.button:hover { transform: scale(1.1); }
+  #heartCanvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.7; }
+</style>
 </head>
-
 <body>
 
-  <!-- Thank you text -->
-  <div id="thankyou">Thank you</div>
+<div id="thankyou">Thank You</div>
+<img src="images/thanks.png" class="responsive">
+<h1>BAIJII!! baby.</h1>
 
-  <!-- Sticker image -->
-  <img src="images/thanks.png" class="responsive">
+<canvas id="heartCanvas"></canvas>
 
-  <!-- Small text -->
-  <h1>BAIJII!! BABY</h1>
+<a class="button" onclick="startLove()">Click here to make me your aashtai zaluu.</a>
 
-  <!-- Hearts canvas -->
-  <canvas id="confettiCanvas"></canvas>
-
-  <audio id="heartSound">
+<audio id="heartSound">
   <source src="heart.mp3" type="audio/mpeg">
 </audio>
 
-  <!-- Button -->
-<a class="button" onclick="startLove()">
-  Click here to make me your aashtai zaluu.
-</a>
-
-  <!-- Heart animation -->
-
- <script>
-/* ===== canvas setup ===== */
-const canvas = document.getElementById("confettiCanvas");
+<script>
+const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+const sound = document.getElementById("heartSound");
 let hearts = [];
-let audioCtx;
 
-/* ===== 1. sound (file хэрэггүй) ===== */
-function playHeartbeat() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
+function startLove(){
+  sound.play();
 
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-
-  osc.type = "sine";
-  osc.frequency.setValueAtTime(520, audioCtx.currentTime);
-  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.25);
-}
-
-/* ===== 2. startLove (CLICK ДАРАХАД) ===== */
-function startLove() {
-  playHeartbeat();        // 🔊 sound
-  startVibration();       // 📳 mobile vibration
-  createHearts();         // ❤️ зүрх
-  animateHearts();
-
-  // ⏱ 2 секундийн дараа дараагийн хуудас
-  setTimeout(() => {
-    window.location.href = "dearbella.html";
-  }, 4000);
-}
-
-/* ===== vibration ===== */
-function startVibration() {
-  if (navigator.vibrate) {
-    navigator.vibrate([100, 50, 100]);
-  }
-}
-
-/* ===== hearts ===== */
-function createHearts() {
   hearts = [];
-  for (let i = 0; i < 60; i++) {
+  for(let i=0;i<36;i++){
+    const img = new Image();
+    img.src = `images/heart${i+1}.png`;
     hearts.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * -canvas.height,
-      size: Math.random() * 14 + 10,
-      speed: Math.random() * 2 + 1,
-      sway: Math.random() * 2 + 1,
-      angle: Math.random() * Math.PI * 2,
+      x: Math.random()*canvas.width,
+      y: Math.random()*-canvas.height,
+      size: Math.random()*40+30,
+      speed: Math.random()*2+1,
+      sway: Math.random()*2+1,
+      angle: Math.random()*Math.PI*2,
+      img: img,
       opacity: Math.random()
     });
   }
+  animateHearts();
+
+  // 4 секундийн дараа DearBella.html руу шилжих
+  setTimeout(()=>{ window.location.href="dearbella.html"; }, 4000);
 }
 
-function drawHeart(x, y, size, opacity) {
+function drawHeart(x,y,size,opacity,img){
+  if(!img) return;
   ctx.save();
-  ctx.translate(x, y);
-  ctx.scale(size / 30, size / 30);
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.bezierCurveTo(-15, -15, -30, 10, 0, 30);
-  ctx.bezierCurveTo(30, 10, 15, -15, 0, 0);
-  ctx.closePath();
-  ctx.fillStyle = `rgba(255,80,120,${opacity})`;
-  ctx.fill();
+  ctx.globalAlpha = opacity;
+  ctx.drawImage(img,x-size/2,y-size/2,size,size);
   ctx.restore();
 }
 
-function animateHearts() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  hearts.forEach(h => {
-    h.angle += 0.05;
-    h.x += Math.sin(h.angle) * h.sway; // ↔️ баруун зүүн савлах
-    h.y += h.speed;
-    drawHeart(h.x, h.y, h.size, h.opacity);
+function animateHearts(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  hearts.forEach(h=>{
+    h.angle+=0.05;
+    h.x+=Math.sin(h.angle)*h.sway;
+    h.y+=h.speed;
+    drawHeart(h.x,h.y,h.size,h.opacity,h.img);
+    if(h.y>canvas.height+50) h.y=-50;
   });
   requestAnimationFrame(animateHearts);
 }
 </script>
-
 </body>
 </html>
