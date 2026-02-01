@@ -1,4 +1,4 @@
-body.dearbella { background-color:#ffe6f0; font-family:'Bangers',cursive; text-align:center; margin:0; padding:0;}
+body.dearbella { background-color:#ffe6f0; font-family:'Bitcount Single',cursive; text-align:center; margin:0; padding:0;}
 h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #gameBoard { position:relative; width:100%; height:80vh;}
 .card { width:100px; height:100px; perspective:800px; cursor:pointer;}
