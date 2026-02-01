@@ -34,12 +34,17 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #heartCanvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
 #hint {
   position: fixed;
-  line-height: 1.4;
-  top: 15px;
-  right: 20px;
-  font-size:2rem;
+  bottom: 20px;   /* доод */
+  right: 20px;    /* баруун */
+  font-size: 1.6rem;
   color: #800020;
-  opacity: 0.8;
+  opacity: 0.9;
   z-index: 10;
+  line-height: 1.4;
   text-align: right;
+     background: rgba(255,255,255,0.5);
+  padding: 10px 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
 }
+
