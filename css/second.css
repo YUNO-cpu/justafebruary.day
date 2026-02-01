@@ -1,34 +1,30 @@
-/* second.css */
-
-/* BODY */
 body {
-  background-color: #b7ddf2;
+  background: linear-gradient(135deg, #4c0013, #800020);
   font-family: 'Bangers', cursive;
   text-align: center;
   margin:0;
-  padding:20px;
+  padding:0;
+  overflow-x:hidden;
+  height:100vh;
+  color:#ffffff;
 }
 
-/* HEADINGS */
 h1 {
-  color: #2c3e50;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-top: 20px;
+  color:#ffddc0;
+  text-shadow: 2px 2px #590016;
 }
 
-/* GAME BOARD */
 #gameBoard {
-  display: grid;
-  grid-template-columns: repeat(6, 100px);
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
 }
 
-/* CARD BASE */
 .card {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   perspective: 800px;
   cursor: pointer;
 }
@@ -49,52 +45,45 @@ h1 {
   position: absolute;
   width: 100%;
   height: 100%;
+  border-radius: 15px;
   backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-/* FRONT – question mark */
 .card-front {
-  background-color: #ffb6c1;
+  background-color: #ffddc0;
   font-size: 2rem;
-  color: white;
-  clip-path: polygon(
-    50% 0%, 61% 14%, 75% 25%, 85% 38%, 90% 50%, 
-    85% 62%, 75% 75%, 61% 86%, 50% 100%, 
-    39% 86%, 25% 75%, 15% 62%, 10% 50%, 
-    15% 38%, 25% 25%, 39% 14%
-  );
+  color:#800020;
+  box-shadow: 0 0 5px #590016;
 }
 
-/* BACK – картны зураг */
 .card-back {
   transform: rotateY(180deg);
-  overflow: hidden;
-  clip-path: polygon(
-    50% 0%, 61% 14%, 75% 25%, 85% 38%, 90% 50%, 
-    85% 62%, 75% 75%, 61% 86%, 50% 100%, 
-    39% 86%, 25% 75%, 15% 62%, 10% 50%, 
-    15% 38%, 25% 25%, 39% 14%
-  );
+  overflow:hidden;
+  border: 2px solid #ffddc0;
+  border-radius: 15px;
 }
 
 .card-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* MATCHED EFFECT */
 .card.matched .card-back {
-  box-shadow: 0 0 20px #ff4f81;
+  box-shadow: 0 0 15px #ffddc0;
+  border-color:#ffffff;
 }
 
-/* OPTIONAL – Hover scale for visual cue */
-.card:hover .card-inner {
-  transform: scale(1.05);
+#heartCanvas {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
 }
 
