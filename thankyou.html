@@ -23,6 +23,7 @@ const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 let hearts = [];
 
 function playBeat(){
@@ -34,27 +35,41 @@ function playBeat(){
 function startLove(){
   playBeat();
   hearts = [];
-  for(let i=0;i<36;i++){
-    const img = new Image();
-    img.src = `images/heart${(i%18)+1}.png`;
+  for(let i=0;i<40;i++){
     hearts.push({
       x: Math.random()*canvas.width,
-      y: Math.random()*-canvas.height,
-      s: Math.random()*30+30,
-      v: Math.random()*2+1,
-      img
+      y: canvas.height + Math.random()*200,
+      size: Math.random()*20+15,
+      speed: Math.random()*2+1,
+      alpha: Math.random()*0.5+0.5
     });
   }
   animate();
   setTimeout(()=>location.href="dearbella.html", 4000);
 }
 
+function drawHeart(x, y, size, alpha){
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(size/30, size/30);
+  ctx.globalAlpha = alpha;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.bezierCurveTo(-15, -15, -30, 10, 0, 30);
+  ctx.bezierCurveTo(30, 10, 15, -15, 0, 0);
+  ctx.fillStyle = "#ff4d6d";
+  ctx.fill();
+  ctx.restore();
+}
+
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   hearts.forEach(h=>{
-    h.y += h.v;
-    ctx.drawImage(h.img, h.x, h.y, h.s, h.s);
-    if(h.y > canvas.height) h.y = -50;
+    h.y -= h.speed;
+    drawHeart(h.x, h.y, h.size, h.alpha);
+    if(h.y < -50){
+      h.y = canvas.height + 50;
+    }
   });
   requestAnimationFrame(animate);
 }
