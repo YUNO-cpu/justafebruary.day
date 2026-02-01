@@ -3,6 +3,11 @@ body.dearbella {
   background: linear-gradient(270deg,#590016,#800020,	#4c0013);
   background-size: 400% 400%;
   animation: bgmove 10s infinite;
+    text-align:center;
+  margin:0;
+  padding:0;
+  height:100vh;        /* чухал */
+  overflow:hidden;    /* чухал */
 }
 
 @keyframes bgmove {
