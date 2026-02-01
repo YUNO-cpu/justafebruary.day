@@ -22,6 +22,7 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #heartCanvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
 #hint {
   position: fixed;
+  line-height: 1.4;
   top: 15px;
   right: 20px;
   font-size: 1.2rem;
