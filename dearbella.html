@@ -4,136 +4,24 @@
 <meta charset="UTF-8">
 <title>Drag & Heart Game</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/second.css">
+<link rel="stylesheet" href="css/game.css">
 </head>
-<body>
+<body class="dearbella">
 
 <h1>Find the Hearts ❤️</h1>
-
 <div id="gameBoard"></div>
 
 <canvas id="heartCanvas"></canvas>
-
-<audio id="heartSound">
-  <source src="heart.mp3" type="audio/mpeg">
-</audio>
+<audio id="heartSound" src="audio/heart.mp3"></audio>
 
 <script>
-// ========== Canvas Setup for Heart Rain ==========
+// ===== Heart Canvas Setup =====
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let hearts = [];
 
-// ========== Card Images ==========
-const heartImages = [];
-for(let i=1;i<=18;i++){
-  const img = new Image();
-  img.src = `images/heart${i}.png`;
-  heartImages.push(img);
-}
-
-// ========== Shuffle Function ==========
-function shuffle(array){
-  for(let i=array.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-// ========== Zүрхэн координат formula ==========
-function heartCoords(n, scale=15, offsetX=window.innerWidth/2, offsetY=window.innerHeight/2){
-  const points = [];
-  for(let i=0;i<n;i++){
-    const t = i/(n-1)*Math.PI*2;
-    const x = 16*Math.pow(Math.sin(t),3);
-    const y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
-    points.push({
-      x: offsetX + x*scale,
-      y: offsetY - y*scale
-    });
-  }
-  return points;
-}
-
-// ========== Generate Cards ==========
-const gameBoard = document.getElementById("gameBoard");
-let cardsArray = [...heartImages, ...heartImages];
-shuffle(cardsArray);
-
-// 36 coordinates for heart shape
-const coords = heartCoords(36, 15, window.innerWidth/2, window.innerHeight/2);
-
-let firstCard = null;
-let secondCard = null;
-let lockBoard = false;
-
-cardsArray.forEach((img, idx)=>{
-  const card = document.createElement("div");
-  card.classList.add("card");
-  card.style.position = "absolute";
-  card.style.left = coords[idx].x + "px";
-  card.style.top = coords[idx].y + "px";
-
-  const inner = document.createElement("div");
-  inner.classList.add("card-inner");
-
-  const front = document.createElement("div");
-  front.classList.add("card-front");
-  front.textContent = "?";
-
-  const back = document.createElement("div");
-  back.classList.add("card-back");
-  const image = document.createElement("img");
-  image.src = img.src;
-  back.appendChild(image);
-
-  inner.appendChild(front);
-  inner.appendChild(back);
-  card.appendChild(inner);
-  gameBoard.appendChild(card);
-
-  card.addEventListener("click", ()=>{
-    if(lockBoard) return;
-    if(card===firstCard) return;
-
-    const heartSound = document.getElementById("heartSound");
-    heartSound.currentTime = 0;
-    heartSound.play();
-
-    card.classList.add("flipped");
-
-    if(!firstCard){
-      firstCard = card;
-    } else {
-      secondCard = card;
-      lockBoard = true;
-
-      const firstImg = firstCard.querySelector(".card-back img").src;
-      const secondImg = secondCard.querySelector(".card-back img").src;
-
-      if(firstImg === secondImg){
-        firstCard.classList.add("matched");
-        secondCard.classList.add("matched");
-        triggerHeartRain();
-        resetBoard();
-      } else {
-        setTimeout(()=>{
-          firstCard.classList.remove("flipped");
-          secondCard.classList.remove("flipped");
-          resetBoard();
-        },800);
-      }
-    }
-  });
-});
-
-function resetBoard(){
-  [firstCard, secondCard, lockBoard] = [null,null,false];
-}
-
-// ========== Heart Rain ==========
 function triggerHeartRain(){
   for(let i=0;i<36;i++){
     const img = new Image();
@@ -153,10 +41,9 @@ function triggerHeartRain(){
 }
 
 function drawHeart(x,y,size,opacity,img){
-  if(!img) return;
   ctx.save();
   ctx.globalAlpha = opacity;
-  ctx.drawImage(img,x-size/2,y-size/2,size,size);
+  ctx.drawImage(img, x-size/2, y-size/2, size, size);
   ctx.restore();
 }
 
@@ -172,6 +59,75 @@ function animateHearts(){
   requestAnimationFrame(animateHearts);
 }
 
+// ===== Drag & Flip Game =====
+const gameBoard = document.getElementById("gameBoard");
+const heartImages = [];
+for(let i=1;i<=18;i++){
+  const img = new Image();
+  img.src = `images/heart${i}.png`;
+  heartImages.push(img);
+}
+
+// Shuffle
+function shuffle(array){for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [array[i], array[j]]=[array[j], array[i]];}}
+
+// Cards setup
+let cardsArray = [...heartImages, ...heartImages];
+shuffle(cardsArray);
+
+let firstCard=null, secondCard=null, lockBoard=false;
+
+cardsArray.forEach((img, idx)=>{
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.style.position="absolute";
+  card.style.left = (50+idx*110)+"px";  // simple layout for demo
+  card.style.top = "100px";
+
+  const inner = document.createElement("div");
+  inner.classList.add("card-inner");
+
+  const front = document.createElement("div");
+  front.classList.add("card-front");
+  front.textContent="?";
+
+  const back = document.createElement("div");
+  back.classList.add("card-back");
+  const image = document.createElement("img");
+  image.src = img.src;
+  back.appendChild(image);
+
+  inner.appendChild(front);
+  inner.appendChild(back);
+  card.appendChild(inner);
+  gameBoard.appendChild(card);
+
+  card.addEventListener("click", ()=>{
+    if(lockBoard) return;
+    if(card===firstCard) return;
+    const heartSound = document.getElementById("heartSound");
+    heartSound.currentTime=0;
+    heartSound.play();
+    card.classList.add("flipped");
+
+    if(!firstCard){
+      firstCard=card;
+    } else {
+      secondCard=card;
+      lockBoard=true;
+      if(firstCard.querySelector(".card-back img").src === secondCard.querySelector(".card-back img").src){
+        firstCard.classList.add("matched");
+        secondCard.classList.add("matched");
+        triggerHeartRain();
+        resetBoard();
+      } else {
+        setTimeout(()=>{firstCard.classList.remove("flipped"); secondCard.classList.remove("flipped"); resetBoard();},800);
+      }
+    }
+  });
+});
+
+function resetBoard(){ [firstCard, secondCard, lockBoard] = [null,null,false]; }
 </script>
 
 </body>
