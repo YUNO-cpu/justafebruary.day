@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Drag & Heart Game</title>
+<title>Valentine Heart Game</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/game.css">
 </head>
@@ -12,10 +12,8 @@
 <div id="gameBoard"></div>
 
 <canvas id="heartCanvas"></canvas>
-<audio id="heartSound" src="audio/heart.mp3"></audio>
 
 <script>
-// ===== Heart Canvas Setup =====
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -59,7 +57,7 @@ function animateHearts(){
   requestAnimationFrame(animateHearts);
 }
 
-// ===== Drag & Flip Game =====
+// ========== Cards setup ==========
 const gameBoard = document.getElementById("gameBoard");
 const heartImages = [];
 for(let i=1;i<=18;i++){
@@ -69,10 +67,23 @@ for(let i=1;i<=18;i++){
 }
 
 // Shuffle
-function shuffle(array){for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [array[i], array[j]]=[array[j], array[i]];}}
+function shuffle(array){for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[array[i],array[j]]=[array[j],array[i]];}}
 
-// Cards setup
-let cardsArray = [...heartImages, ...heartImages];
+// Generate coordinates for heart shape
+function heartCoords(n, scale=15, offsetX=window.innerWidth/2, offsetY=window.innerHeight/2){
+  const points=[];
+  for(let i=0;i<n;i++){
+    const t=i/(n-1)*Math.PI*2;
+    const x=16*Math.pow(Math.sin(t),3);
+    const y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+    points.push({x: offsetX + x*scale, y: offsetY - y*scale});
+  }
+  return points;
+}
+
+const coords = heartCoords(36, 15, window.innerWidth/2, window.innerHeight/2);
+
+let cardsArray=[...heartImages,...heartImages];
 shuffle(cardsArray);
 
 let firstCard=null, secondCard=null, lockBoard=false;
@@ -81,8 +92,8 @@ cardsArray.forEach((img, idx)=>{
   const card = document.createElement("div");
   card.classList.add("card");
   card.style.position="absolute";
-  card.style.left = (50+idx*110)+"px";  // simple layout for demo
-  card.style.top = "100px";
+  card.style.left = coords[idx].x + "px";
+  card.style.top = coords[idx].y + "px";
 
   const inner = document.createElement("div");
   inner.classList.add("card-inner");
@@ -105,9 +116,11 @@ cardsArray.forEach((img, idx)=>{
   card.addEventListener("click", ()=>{
     if(lockBoard) return;
     if(card===firstCard) return;
-    const heartSound = document.getElementById("heartSound");
-    heartSound.currentTime=0;
-    heartSound.play();
+
+    const romanticSound = new Audio("audio/romantic.mp3");
+    romanticSound.currentTime=0;
+    romanticSound.play();
+
     card.classList.add("flipped");
 
     if(!firstCard){
@@ -127,9 +140,9 @@ cardsArray.forEach((img, idx)=>{
   });
 });
 
-function resetBoard(){ [firstCard, secondCard, lockBoard] = [null,null,false]; }
-</script>
+function resetBoard(){ [firstCard,secondCard,lockBoard] = [null,null,false]; }
 
+</script>
 </body>
 </html>
 
