@@ -1,4 +1,5 @@
 body.dearbella {
+   font-family: 'Press Start 2P', cursive;
   background: linear-gradient(270deg,#ffe6f0,#ffd6e8,#ffe6f0);
   background-size: 400% 400%;
   animation: bgmove 10s infinite;
