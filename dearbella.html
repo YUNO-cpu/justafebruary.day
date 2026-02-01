@@ -170,11 +170,14 @@ cardsArray.forEach((img, idx)=>{
         resetBoard();
 
         // WIN
-        if(matchedCount === totalPairs){
-          setTimeout(()=>{
-            alert("All pairs matched JUST LIKE US.");
-          },500);
-        }
+      if(matchedCount === totalPairs){
+  setTimeout(()=>{
+    triggerHeartRain();   // зөвхөн энд
+    setTimeout(()=>{
+      alert("You won my heart ❤️");
+    },500);
+  },500);
+}
 
       } else {
         setTimeout(()=>{
