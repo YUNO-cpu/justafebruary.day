@@ -25,6 +25,7 @@ body > *:not(canvas) {
 </head>
 
 <body>
+<body class="thankyou">
 
 <div id="thankyou">Thank You</div>
 <img src="images/thanks.png" class="responsive">
@@ -39,42 +40,41 @@ const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
-
-let hearts=[];
+let hearts = [];
 
 function playBeat(){
-  const a=new (window.AudioContext||window.webkitAudioContext)();
-  const o=a.createOscillator();
-  const g=a.createGain();
-  o.frequency.value=180;
-  g.gain.value=0.1;
+  const a = new (window.AudioContext||window.webkitAudioContext)();
+  const o = a.createOscillator();
+  const g = a.createGain();
+  o.frequency.value = 180;
+  g.gain.value = 0.1;
   o.connect(g); g.connect(a.destination);
-  o.start(); o.stop(a.currentTime+0.15);
+  o.start(); o.stop(a.currentTime + 0.15);
 }
 
 function startLove(){
   playBeat();
-  hearts=[];
+  hearts = [];
   for(let i=0;i<36;i++){
-    const img=new Image();
-    img.src=`images/heart${(i%18)+1}.png`;
+    const img = new Image();
+    img.src = `images/heart${(i%18)+1}.png`;
     hearts.push({
-      x:Math.random()*canvas.width,
-      y:Math.random()*-canvas.height,
-      s:Math.random()*30+30,
-      v:Math.random()*2+1,
+      x: Math.random()*canvas.width,
+      y: Math.random()*-canvas.height,
+      s: Math.random()*30+30,
+      v: Math.random()*2+1,
       img
     });
   }
   animate();
-  setTimeout(()=>location.href="dearbella.html", 4000);
+  setTimeout(()=>location.href="dearbella.html", 4000); // 4 секундээс хойш тоглоом руу
 }
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   hearts.forEach(h=>{
-    h.y+=h.v;
-    ctx.drawImage(h.img,h.x,h.y,h.s,h.s);
+    h.y += h.v;
+    ctx.drawImage(h.img, h.x, h.y, h.s, h.s);
     if(h.y>canvas.height) h.y=-50;
   });
   requestAnimationFrame(animate);
