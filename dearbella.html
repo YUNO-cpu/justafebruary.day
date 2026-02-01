@@ -9,10 +9,11 @@
 <body class="dearbella">
 
 <div id="hint">
- Find the matches<br>
+  Find the matches<br>
   Flip the cards<br>
-  Fallinlove
+  Fall in love ❤️
 </div>
+
 <div id="gameBoard"></div>
 
 <canvas id="heartCanvas"></canvas>
@@ -24,6 +25,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let hearts = [];
+
 function triggerHeartRain(){
   hearts = [];
   for(let i=0;i<30;i++){
@@ -45,15 +47,6 @@ function triggerHeartRain(){
     hearts = [];
   }, 3000);
 }
- function animateHearts(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  hearts.forEach(h=>{
-    h.y += h.speed;
-    drawHeart(h.x,h.y,h.size,h.opacity,h.img);
-  });
-  if(hearts.length > 0){
-    requestAnimationFrame(animateHearts);
-  }
 
 function drawHeart(x,y,size,opacity,img){
   ctx.save();
@@ -65,15 +58,13 @@ function drawHeart(x,y,size,opacity,img){
 function animateHearts(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   hearts.forEach(h=>{
-    h.angle+=0.05;
-    h.x+=Math.sin(h.angle)*h.sway;
-    h.y+=h.speed;
+    h.y += h.speed;
     drawHeart(h.x,h.y,h.size,h.opacity,h.img);
-    if(h.y>canvas.height+50) h.y=-50;
   });
-  requestAnimationFrame(animateHearts);
+  if(hearts.length > 0){
+    requestAnimationFrame(animateHearts);
+  }
 }
- }
 
 // ========== Cards setup ==========
 const gameBoard = document.getElementById("gameBoard");
@@ -94,20 +85,19 @@ function shuffle(array){
   }
 }
 
-// ====== PIXEL HEART LAYOUT (зураг шиг) ======
+// ====== PIXEL HEART LAYOUT (36 cards) ======
 const layout = [
- const layout = [
-  [0,1,1,0,0,1,1,0],   
-  [1,1,1,1,1,1,1,1],  
-  [1,1,1,1,1,1,1,1],   
-  [1,1,1,1,1,1,1,1],  
-  [0,1,1,1,1,1,1,0],   
-  [0,0,1,1,1,1,0,0],   
-  [0,0,0,1,1,0,0,0],   
-];                    
+  [0,1,1,0,0,1,1,0],
+  [1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1],
+  [0,1,1,1,1,1,1,0],
+  [0,0,1,1,1,1,0,0],
+  [0,0,0,1,1,0,0,0],
+];
 
 const coords = [];
-const size = 110; // картын хэмжээ + зай
+const size = 110; 
 const startX = window.innerWidth/2 - (layout[0].length/2)*size;
 const startY = 120;
 
@@ -127,6 +117,8 @@ let cardsArray = [...heartImages, ...heartImages];
 shuffle(cardsArray);
 
 let firstCard=null, secondCard=null, lockBoard=false;
+let matchedCount = 0;
+const totalPairs = cardsArray.length / 2;
 
 cardsArray.forEach((img, idx)=>{
   const card = document.createElement("div");
@@ -174,8 +166,17 @@ cardsArray.forEach((img, idx)=>{
 
         firstCard.classList.add("matched");
         secondCard.classList.add("matched");
+        matchedCount++;
         triggerHeartRain();
         resetBoard();
+
+        // WIN
+        if(matchedCount === totalPairs){
+          setTimeout(()=>{
+            alert("All pairs matched JUST LIKE US.");
+          },500);
+        }
+
       } else {
         setTimeout(()=>{
           firstCard.classList.remove("flipped");
@@ -193,4 +194,5 @@ function resetBoard(){
 </script>
 </body>
 </html>
+
 
