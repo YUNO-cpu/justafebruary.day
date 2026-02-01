@@ -14,6 +14,7 @@
 <canvas id="heartCanvas"></canvas>
 
 <script>
+// ========== Heart rain canvas ==========
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -21,6 +22,7 @@ canvas.height = window.innerHeight;
 let hearts = [];
 
 function triggerHeartRain(){
+  hearts = [];
   for(let i=0;i<36;i++){
     const img = new Image();
     img.src = `images/heart${(i%18)+1}.png`;
@@ -59,6 +61,8 @@ function animateHearts(){
 
 // ========== Cards setup ==========
 const gameBoard = document.getElementById("gameBoard");
+
+// Heart images
 const heartImages = [];
 for(let i=1;i<=18;i++){
   const img = new Image();
@@ -67,23 +71,41 @@ for(let i=1;i<=18;i++){
 }
 
 // Shuffle
-function shuffle(array){for(let i=array.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[array[i],array[j]]=[array[j],array[i]];}}
-
-// Generate coordinates for heart shape
-function heartCoords(n, scale=15, offsetX=window.innerWidth/2, offsetY=window.innerHeight/2){
-  const points=[];
-  for(let i=0;i<n;i++){
-    const t=i/(n-1)*Math.PI*2;
-    const x=16*Math.pow(Math.sin(t),3);
-    const y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
-    points.push({x: offsetX + x*scale, y: offsetY - y*scale});
+function shuffle(array){
+  for(let i=array.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]];
   }
-  return points;
 }
 
-const coords = heartCoords(36, 15, window.innerWidth/2, window.innerHeight/2);
+// ====== PIXEL HEART LAYOUT (зураг шиг) ======
+const layout = [
+  [0,1,1,0,0,1,1,0],
+  [1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1],
+  [0,1,1,1,1,1,1,0],
+  [0,0,1,1,1,1,0,0],
+  [0,0,0,1,1,0,0,0],
+];
 
-let cardsArray=[...heartImages,...heartImages];
+const coords = [];
+const size = 110; // картын хэмжээ + зай
+const startX = window.innerWidth/2 - (layout[0].length/2)*size;
+const startY = 120;
+
+layout.forEach((row, y)=>{
+  row.forEach((cell, x)=>{
+    if(cell === 1){
+      coords.push({
+        x: startX + x*size,
+        y: startY + y*size
+      });
+    }
+  });
+});
+
+// Create cards
+let cardsArray = [...heartImages, ...heartImages];
 shuffle(cardsArray);
 
 let firstCard=null, secondCard=null, lockBoard=false;
@@ -100,7 +122,7 @@ cardsArray.forEach((img, idx)=>{
 
   const front = document.createElement("div");
   front.classList.add("card-front");
-  front.textContent="?";
+  front.textContent="❤️";
 
   const back = document.createElement("div");
   back.classList.add("card-back");
@@ -128,20 +150,28 @@ cardsArray.forEach((img, idx)=>{
     } else {
       secondCard=card;
       lockBoard=true;
-      if(firstCard.querySelector(".card-back img").src === secondCard.querySelector(".card-back img").src){
+
+      if(firstCard.querySelector(".card-back img").src ===
+         secondCard.querySelector(".card-back img").src){
+
         firstCard.classList.add("matched");
         secondCard.classList.add("matched");
         triggerHeartRain();
         resetBoard();
       } else {
-        setTimeout(()=>{firstCard.classList.remove("flipped"); secondCard.classList.remove("flipped"); resetBoard();},800);
+        setTimeout(()=>{
+          firstCard.classList.remove("flipped");
+          secondCard.classList.remove("flipped");
+          resetBoard();
+        },800);
       }
     }
   });
 });
 
-function resetBoard(){ [firstCard,secondCard,lockBoard] = [null,null,false]; }
-
+function resetBoard(){
+  [firstCard,secondCard,lockBoard] = [null,null,false];
+}
 </script>
 </body>
 </html>
