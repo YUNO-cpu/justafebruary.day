@@ -20,25 +20,36 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let hearts = [];
-
 function triggerHeartRain(){
   hearts = [];
-  for(let i=0;i<36;i++){
+  for(let i=0;i<30;i++){
     const img = new Image();
     img.src = `images/heart${(i%18)+1}.png`;
     hearts.push({
       x: Math.random()*canvas.width,
-      y: Math.random()*-canvas.height,
-      size: Math.random()*40+30,
-      speed: Math.random()*2+1,
-      sway: Math.random()*2+1,
-      angle: Math.random()*Math.PI*2,
+      y: -50,
+      size: Math.random()*40+20,
+      speed: Math.random()*3+2,
       img: img,
-      opacity: Math.random()
+      opacity: 1
     });
   }
   animateHearts();
+
+  // 3 секундийн дараа зогсоно
+  setTimeout(()=>{
+    hearts = [];
+  }, 3000);
 }
+ function animateHearts(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  hearts.forEach(h=>{
+    h.y += h.speed;
+    drawHeart(h.x,h.y,h.size,h.opacity,h.img);
+  });
+  if(hearts.length > 0){
+    requestAnimationFrame(animateHearts);
+  }
 
 function drawHeart(x,y,size,opacity,img){
   ctx.save();
