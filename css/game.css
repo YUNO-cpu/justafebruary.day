@@ -1,6 +1,6 @@
 body.dearbella {
    font-family: 'Press Start 2P', cursive;
-  background: linear-gradient(270deg,#ffe6f0,#ffd6e8,#ffe6f0);
+  background: linear-gradient(270deg,#590016,#800020,	#4c0013);
   background-size: 400% 400%;
   animation: bgmove 10s infinite;
 }
@@ -27,7 +27,7 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
   border-radius:10px;   /* жаахан булан дугуй */
   cursor:pointer;
 }
-.card-front { background:#ffb6c1; color:white; font-size:2rem; }
+.card-front { background:#4c0013; color:white; font-size:2rem; }
 .card-back { transform:rotateY(180deg); overflow:hidden; }
 .card-back img { width:80%; height:80%; object-fit:cover; }
 .card.matched .card-back { box-shadow:0 0 15px #ffddc0; border-color:#ffffff;}
