@@ -1,4 +1,15 @@
-body.dearbella { background-color:#ffe6f0; font-family:'Bungee',cursive; text-align:center; margin:0; padding:0;}
+body.dearbella {
+  background: linear-gradient(270deg,#ffe6f0,#ffd6e8,#ffe6f0);
+  background-size: 400% 400%;
+  animation: bgmove 10s infinite;
+}
+
+@keyframes bgmove {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #gameBoard { position:relative; width:100%; height:80vh;}
 .card { width:100px; height:100px; perspective:800px; cursor:pointer;}
