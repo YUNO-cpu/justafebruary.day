@@ -84,7 +84,12 @@ function startLove(){
   animateHearts();
 
   // 4 секундийн дараа DearBella.html руу шилжих
-  setTimeout(()=>{ window.location.href="dearbella.html"; }, 4000);
+setTimeout(()=>{
+  document.body.classList.add("fade-out");
+  setTimeout(()=>{
+    window.location.href = "dearbella.html";
+  }, 800);
+}, 3200);
 }
 
 function drawHeart(x,y,size,opacity,img){
