@@ -4,42 +4,26 @@
 <meta charset="UTF-8">
 <title>Thank You</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/second.css">
+
 <style>
-  #thankyou { color: #2c3e50; font-size: 4rem; margin-bottom: 10px; }
-  h1 { color: #2c3e50; font-size: 2.5rem; margin-bottom: 20px; }
-  a.button { text-decoration: none; display: inline-block; font-family: 'Bangers', cursive; font-size: 1.5rem; padding: 12px 30px; border-radius: 12px; background-color:#6fbce6; color:white; cursor:pointer; }
-  a.button:hover { transform: scale(1.1); }
 #heartCanvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 10;      /* ← 0 БИШ */
-  opacity: 0.7;
-}
-<style>
-body {
-  animation: fadeIn 0.8s ease;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:5;
 }
 
-.fade-out {
-  animation: fadeOut 0.8s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+body > *:not(canvas) {
+  position: relative;
+  z-index: 10;
 }
 </style>
 </head>
+
 <body>
 
 <div id="thankyou">Thank You</div>
@@ -48,69 +32,54 @@ body {
 
 <canvas id="heartCanvas"></canvas>
 
-<a class="button" onclick="startLove()">Click here to make me your aashtai zaluu.</a>
-
-<audio id="heartSound">
-  <source src="heart.mp3" type="audio/mpeg">
-</audio>
+<a class="button" onclick="startLove()">Click here 💖</a>
 
 <script>
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-const sound = document.getElementById("heartSound");
-let hearts = [];
+let hearts=[];
+
+function playBeat(){
+  const a=new (window.AudioContext||window.webkitAudioContext)();
+  const o=a.createOscillator();
+  const g=a.createGain();
+  o.frequency.value=180;
+  g.gain.value=0.1;
+  o.connect(g); g.connect(a.destination);
+  o.start(); o.stop(a.currentTime+0.15);
+}
 
 function startLove(){
-  sound.play();
-
-  hearts = [];
+  playBeat();
+  hearts=[];
   for(let i=0;i<36;i++){
-    const img = new Image();
-    img.src = `images/heart${i+1}.png`;
+    const img=new Image();
+    img.src=`images/heart${(i%18)+1}.png`;
     hearts.push({
-      x: Math.random()*canvas.width,
-      y: Math.random()*-canvas.height,
-      size: Math.random()*40+30,
-      speed: Math.random()*2+1,
-      sway: Math.random()*2+1,
-      angle: Math.random()*Math.PI*2,
-      img: img,
-      opacity: Math.random()
+      x:Math.random()*canvas.width,
+      y:Math.random()*-canvas.height,
+      s:Math.random()*30+30,
+      v:Math.random()*2+1,
+      img
     });
   }
-  animateHearts();
-
-  // 4 секундийн дараа DearBella.html руу шилжих
-setTimeout(()=>{
-  document.body.classList.add("fade-out");
-  setTimeout(()=>{
-    window.location.href = "dearbella.html";
-  }, 800);
-}, 3200);
+  animate();
+  setTimeout(()=>location.href="dearbella.html", 4000);
 }
 
-function drawHeart(x,y,size,opacity,img){
-  if(!img) return;
-  ctx.save();
-  ctx.globalAlpha = opacity;
-  ctx.drawImage(img,x-size/2,y-size/2,size,size);
-  ctx.restore();
-}
-
-function animateHearts(){
+function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   hearts.forEach(h=>{
-    h.angle+=0.05;
-    h.x+=Math.sin(h.angle)*h.sway;
-    h.y+=h.speed;
-    drawHeart(h.x,h.y,h.size,h.opacity,h.img);
-    if(h.y>canvas.height+50) h.y=-50;
+    h.y+=h.v;
+    ctx.drawImage(h.img,h.x,h.y,h.s,h.s);
+    if(h.y>canvas.height) h.y=-50;
   });
-  requestAnimationFrame(animateHearts);
+  requestAnimationFrame(animate);
 }
 </script>
+
 </body>
 </html>
