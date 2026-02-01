@@ -16,6 +16,8 @@
 
 <a class="button" onclick="startLove()">Click here to make me your aashtai zaluu</a>
 
+<audio id="beatSound" src="audio/heart.mp3"></audio>
+
 <script>
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
@@ -24,13 +26,9 @@ canvas.height = window.innerHeight;
 let hearts = [];
 
 function playBeat(){
-  const a = new (window.AudioContext||window.webkitAudioContext)();
-  const o = a.createOscillator();
-  const g = a.createGain();
-  o.frequency.value = 180;
-  g.gain.value = 0.1;
-  o.connect(g); g.connect(a.destination);
-  o.start(); o.stop(a.currentTime + 0.15);
+  const beat = document.getElementById("beatSound");
+  beat.currentTime = 0;
+  beat.play();
 }
 
 function startLove(){
@@ -64,4 +62,5 @@ function animate(){
 
 </body>
 </html>
+
 
