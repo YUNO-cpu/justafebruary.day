@@ -62,3 +62,12 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
    color: #800020;
 }
 
+#menuBtn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 40px;      /* энд л хэмжээг нь тохируулна */
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+}
