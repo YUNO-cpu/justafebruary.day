@@ -55,7 +55,8 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 
 #hintover {
    position: fixed;
-   bottom: 20xp;
-   left: 20xp;
+   bottom: 30xp;
+   left: 30xp;
    font-size: 2rem;
    text-align: left;
+}
