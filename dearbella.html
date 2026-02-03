@@ -172,6 +172,10 @@ cardsArray.forEach((img, idx)=>{
     if(lockBoard) return;
     if(card===firstCard) return;
 
+     if(combo >= 3){
+  gameBoard.classList.add("combo");
+}
+
     const romanticSound = new Audio("audio/romantic.mp3");
     romanticSound.currentTime=0;
     romanticSound.play();
@@ -210,6 +214,9 @@ cardsArray.forEach((img, idx)=>{
     },500);
   },500);
 }
+         document.body.style.transition = "0.3s";
+document.body.style.transform = "scale(1.05)";
+
 
       } else {
         setTimeout(()=>{
