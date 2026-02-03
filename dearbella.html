@@ -85,6 +85,9 @@ function animateHearts(){
 // ========== Cards setup ==========
 const gameBoard = document.getElementById("gameBoard");
 
+   gameBoard.classList.add("shake");
+setTimeout(()=>gameBoard.classList.remove("shake"), 300);
+
 // Heart images
 const heartImages = [];
 for(let i=1;i<=18;i++){
@@ -143,6 +146,10 @@ cardsArray.forEach((img, idx)=>{
   card.style.left = coords[idx].x + "px";
   card.style.top = coords[idx].y + "px";
 
+   card.addEventListener("mouseenter", ()=>{
+  hoverSound.play();
+});
+
   const inner = document.createElement("div");
   inner.classList.add("card-inner");
 
@@ -184,6 +191,15 @@ cardsArray.forEach((img, idx)=>{
         secondCard.classList.add("matched");
         matchedCount++;
         resetBoard();
+
+         if(match){
+  firstCard.style.transform = "scale(1.1)";
+  secondCard.style.transform = "scale(1.1)";
+  setTimeout(()=>{
+    firstCard.style.transform = "scale(1)";
+    secondCard.style.transform = "scale(1)";
+  },150);
+}
 
         // WIN
       if(matchedCount === totalPairs){
@@ -228,6 +244,12 @@ function toggleMusic(){
   musicOn ? bgMusic.play() : bgMusic.pause();
 }
 
+   function winSequence(){
+  bgMusic.pause();
+  winSound.play();
+  document.body.classList.add("win");
+}
+   
 function toggleSound(){
   soundOn = !soundOn;
 }
