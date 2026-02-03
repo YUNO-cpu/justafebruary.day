@@ -53,3 +53,9 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
   backdrop-filter: blur(5px);
 }
 
+#hintover {
+   position: fixed;
+   bottom: 20xp;
+   left: 20xp;
+   font-size: 2rem;
+   text-align: left;
