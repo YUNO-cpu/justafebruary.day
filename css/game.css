@@ -100,4 +100,14 @@ body.win {
 .shake {
   animation: shake 0.3s;
 }
+.combo {
+  box-shadow: 0 0 30px gold;
+}
+
+#sideMenu {
+  transition: 0.4s cubic-bezier(.4,0,.2,1);
+}
+.card:hover {
+  transform: translateY(-5px);
+}
 
