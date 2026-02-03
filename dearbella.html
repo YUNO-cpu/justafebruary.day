@@ -281,6 +281,26 @@ function toggleVibration(){
     navigator.vibrate(200);
   }
 }
+   const sideMenu = document.getElementById("sideMenu");
+const moreGames = document.getElementById("moreGames");
+const settings = document.getElementById("settings");
+
+function openMoreGames(){
+  sideMenu.classList.remove("open");
+  moreGames.classList.add("open");
+}
+
+function openSettings(){
+  sideMenu.classList.remove("open");
+  settings.classList.add("open");
+}
+
+function backToMenu(){
+  moreGames.classList.remove("open");
+  settings.classList.remove("open");
+  sideMenu.classList.add("open");
+}
+
 </script>
 </body>
 </html>
