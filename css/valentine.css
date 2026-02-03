@@ -23,8 +23,10 @@ body {
 /* YES / NO товч */
 .buttonGroup {
   display: flex;
-  gap: 5vw;          /* 🔥 px → vw */
+  gap: 5vw;
   position: relative;
+  width: 100%;              /* 🔥 чухал */
+  justify-content: center;  /* 🔥 голлуулна */
 }
 
 /* Товчлуурууд */
