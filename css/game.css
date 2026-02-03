@@ -47,31 +47,6 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
   z-index: 0;  
 }
 
-#hint {
-  position: fixed;
-  bottom: 20px;   /* доод */
-  left: 20px;    /* баруун */
-  font-size: 1.6rem;
-  color: #800020;
-  opacity: 0.9;
-  z-index: 10;
-  line-height: 1.4;
-  text-align: left;
-     background: rgba(255,255,255,0.5);
-  padding: 10px 15px;
-  border-radius: 12px;
-  backdrop-filter: blur(5px);
-}
-
-#hintover {
-   position: fixed;
-   bottom: 30px;
-  right: 30px;
-   font-size: 2rem;
-   text-align: right;
-   color: #800020;
-}
-
 #menuBtn {
   position: fixed;
   top: 15px;
@@ -145,4 +120,29 @@ body.win {
 .subMenu {
   position: relative;
   z-index: 10;
+}
+
+#hint {
+  position: fixed;
+  bottom: 20px;   /* доод */
+  left: 20px;    /* баруун */
+  font-size: 1.6rem;
+  color: #800020;
+  opacity: 0.9;
+  z-index: 10;
+  line-height: 1.4;
+  text-align: left;
+     background: rgba(255,255,255,0.5);
+  padding: 10px 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+#hintover {
+   position: fixed;
+   bottom: 30px;
+  right: 30px;
+   font-size: 2rem;
+   text-align: right;
+   color: #800020;
 }
