@@ -44,7 +44,7 @@ body {
 #yesButton {
   background-color: #6fbce6;
   color: white;
-    transition: font-size 0.3s ease, transform 0.2s ease;
+    transition: font-size 0.3s ease, transform 0.25s ease;
 }
 
 /* NO товч */
