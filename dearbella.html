@@ -49,6 +49,13 @@ FIND THE MATCHES
 <canvas id="heartCanvas"></canvas>
 
 <script>
+   const bgMusic = new Audio("audio/bg.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.4;
+
+const winSound = new Audio("audio/win.mp3");
+const hoverSound = new Audio("audio/hover.mp3");
+
 // ========== Heart rain canvas ==========
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
@@ -154,6 +161,9 @@ let matchedCount = 0;
 const totalPairs = cardsArray.length / 2;
 
 cardsArray.forEach((img, idx)=>{
+   
+   if(!coords[idx]) return;
+
   const card = document.createElement("div");
   card.classList.add("card");
   card.style.position="absolute";
@@ -186,10 +196,6 @@ cardsArray.forEach((img, idx)=>{
     if(lockBoard) return;
     if(card===firstCard) return;
 
-     if(combo >= 3){
-  gameBoard.classList.add("combo");
-}
-
     const romanticSound = new Audio("audio/romantic.mp3");
     romanticSound.currentTime=0;
     romanticSound.play();
@@ -210,14 +216,6 @@ cardsArray.forEach((img, idx)=>{
         matchedCount++;
         resetBoard();
 
-         if(match){
-  firstCard.style.transform = "scale(1.1)";
-  secondCard.style.transform = "scale(1.1)";
-  setTimeout(()=>{
-    firstCard.style.transform = "scale(1)";
-    secondCard.style.transform = "scale(1)";
-  },150);
-}
 
         // WIN
       if(matchedCount === totalPairs){
@@ -281,7 +279,6 @@ function toggleVibration(){
     navigator.vibrate(200);
   }
 }
-   const sideMenu = document.getElementById("sideMenu");
 const moreGames = document.getElementById("moreGames");
 const settings = document.getElementById("settings");
 
