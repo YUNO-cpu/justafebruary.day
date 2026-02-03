@@ -44,12 +44,12 @@
 
     noButton.addEventListener("click", () => {
       let current = parseFloat(getComputedStyle(yesButton).fontSize);
-      yesButton.style.fontSize = current + 0.2 + "rem";
-yesButton.style.transform = "scale(1.05)";
-setTimeout(() => {
-  yesButton.style.transform = "scale(1)";
-}, 200);
-      });
+     noButton.addEventListener("click", () => {
+  yesButton.style.transform = "scale(1.03)";
+  setTimeout(() => {
+    yesButton.style.transform = "scale(1)";
+  }, 150);
+});
 
     function yayConfetti() {
       confetti({
