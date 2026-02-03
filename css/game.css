@@ -40,7 +40,7 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #hint {
   position: fixed;
   bottom: 20px;   /* доод */
-  right: 20px;    /* баруун */
+  left: 20px;    /* баруун */
   font-size: 1.6rem;
   color: #800020;
   opacity: 0.9;
@@ -56,7 +56,7 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #hintover {
    position: fixed;
    bottom: 30px;
-   left: 30px;
+  right: 30px;
    font-size: 2rem;
    text-align: left;
 }
