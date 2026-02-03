@@ -4,54 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Just a February Site</title>
- <link rel="stylesheet" href="css/valentine.css">
-<img src="images/please.png" ... >
-  <!-- Bangers font -->
+
+  <link rel="stylesheet" href="css/valentine.css">
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <!-- Асуулт -->
-  <div id="valentineQuestion">Will you be my valentine?</div>
+  <div class="container">
 
-  <!-- YES / NO товч -->
-  <div class="buttonGroup">
-    <button class="answerButton" id="yesButton" onclick="yayConfetti()">Yes</button>
-    <button class="answerButton" id="noButton">NO</button>
+    <img src="images/please.png" class="heroImg">
+
+    <div id="valentineQuestion">Will you be my Valentine?</div>
+
+    <div class="buttonGroup">
+      <button class="answerButton" id="yesButton" onclick="yayConfetti()">Yes</button>
+      <button class="answerButton" id="noButton">No</button>
+    </div>
+
   </div>
 
-
-  <!-- Canvas for confetti -->
   <canvas id="confettiCanvas"></canvas>
 
-  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     const noButton = document.getElementById("noButton");
     const yesButton = document.getElementById("yesButton");
 
-    // NO товч smooth зугтана
     noButton.addEventListener("mouseover", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 100 - 50;
-      noButton.style.transition = "transform 0.3s ease";
+      const x = Math.random() * 100 - 50;
+      const y = Math.random() * 60 - 30;
       noButton.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    // NO товч click → YES томорно
     noButton.addEventListener("click", () => {
-      let currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
-      yesButton.style.fontSize = currentFontSize + 10 + "px";
+      let current = parseFloat(getComputedStyle(yesButton).fontSize);
+      yesButton.style.fontSize = current + 0.5 + "rem";
     });
 
-    // YES товч click → confetti
     function yayConfetti() {
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 }
       });
-      // Дараа нь thankyou.html руу очно
+
       setTimeout(() => {
         location.href = "thankyou.html";
       }, 1000);
