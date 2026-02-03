@@ -26,9 +26,23 @@ FIND THE MATCHES
 
   <div id="sideMenu">
   <h3>Menu</h3>
-  <button onclick="toggleMusic()">🎵 Music</button>
-  <button onclick="toggleSound()">🔔 Sound</button>
-  <button onclick="toggleVibration()">📳 Vibration</button>
+  <button onclick="openMoreGames()">🕹 More Games</button>
+  <button onclick="openSettings()">🛠 Settings</button>
+</div>
+
+<div id="moreGames" class="subMenu">
+  <h3>More Games</h3>
+  <button onclick="goGame1()">Game 1</button>
+  <button onclick="goGame2()">Game 2</button>
+  <button onclick="backToMenu()">⬅ Back</button>
+</div>
+
+<div id="settings" class="subMenu">
+  <h3>Settings</h3>
+  <button onclick="toggleMusic()">🖱 Music</button>
+  <button onclick="toggleSound()">▶ Sound</button>
+  <button onclick="toggleVibration()">🛰 Vibration</button>
+  <button onclick="backToMenu()">⬅ Back</button>
 </div>
 
 
