@@ -209,6 +209,35 @@ cardsArray.forEach((img, idx)=>{
 function resetBoard(){
   [firstCard,secondCard,lockBoard] = [null,null,false];
 }
+
+   const menuBtn = document.getElementById("menuBtn");
+const sideMenu = document.getElementById("sideMenu");
+
+let musicOn = true;
+let soundOn = true;
+let vibrationOn = true;
+
+function toggleMenu(){
+  sideMenu.classList.toggle("open");
+}
+
+menuBtn.onclick = toggleMenu;
+
+function toggleMusic(){
+  musicOn = !musicOn;
+  musicOn ? bgMusic.play() : bgMusic.pause();
+}
+
+function toggleSound(){
+  soundOn = !soundOn;
+}
+
+function toggleVibration(){
+  vibrationOn = !vibrationOn;
+  if(vibrationOn && navigator.vibrate){
+    navigator.vibrate(200);
+  }
+}
 </script>
 </body>
 </html>
