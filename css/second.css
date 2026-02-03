@@ -1,13 +1,54 @@
-body.thankyou { background: linear-gradient(135deg,#b7ddf2); height:100vh; font-family:'Bangers', cursive; text-align:center; color:#fff; margin:0; padding:0;}
-h1 { font-size:2.8rem; margin-top:20px; color:#2c3e50;}
-#heartCanvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
-.button { font-size:1.5rem; margin-top:20px; padding:10px 20px; background:#8bc3e5; color:#fff; cursor:pointer; border:none; border-radius:10px;}
-.responsive { max-width:80%; height:auto;}
+body.thankyou {
+  background: linear-gradient(135deg,#b7ddf2);
+  min-height:100vh;
+  font-family:'Bangers', cursive;
+  text-align:center;
+  color:#fff;
+  margin:0;
+  padding:20px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+h1 { 
+  font-size: clamp(2rem, 6vw, 2.8rem); 
+  margin-top:20px; 
+  color:#2c3e50;
+}
+
+#heartCanvas { 
+  position:fixed; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%; 
+  pointer-events:none; 
+  z-index:0;
+}
+
+.button { 
+  font-size: clamp(1rem, 4vw, 1.5rem); 
+  margin-top:20px; 
+  padding:10px 20px; 
+  background:#8bc3e5; 
+  color:#fff; 
+  cursor:pointer; 
+  border:none; 
+  border-radius:10px;
+}
+
+.responsive { 
+  max-width:80%; 
+  height:auto;
+}
+
 #thankyou {
-  font-size: 2.2rem;   /* font томруулна */
-  margin-top: 50px;   /* доошлуулна */
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  margin-top: 20px;
   color: #2c3e50;
   z-index: 1;
   position: relative;
 }
-
