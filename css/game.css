@@ -113,11 +113,8 @@ body.win {
 
 #gameBoard,
 .card,
-#menuBtn,
 #hint,
-#hintover,
-#sideMenu,
-.subMenu {
+#hintover {
   position: relative;
   z-index: 10;
 }
