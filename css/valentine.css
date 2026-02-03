@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  padding: 20px; /* бага padding нэмэх */
+  padding: 20px;
   min-height: 100vh;
   background-color: #b7ddf2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* төв биш, дээшээс эхлэх */
+  justify-content: flex-start;
   font-family: "Bangers", cursive;
   text-align: center;
 }
@@ -14,23 +14,23 @@ body {
 /* Асуулт */
 #valentineQuestion {
   font-family: 'Bangers', cursive;
-  font-size: 2.2rem;
-  color: #2c3e50; /* dark slate */
-  margin-bottom: 30px;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* 🔥 px → clamp */
+  color: #2c3e50;
+  margin-bottom: 4vh;   /* 🔥 px → vh */
   text-align: center;
 }
 
-/* YES / NO товч нэг эгнээнд */
+/* YES / NO товч */
 .buttonGroup {
   display: flex;
-  gap: 20px;
+  gap: 5vw;          /* 🔥 px → vw */
   position: relative;
 }
 
 /* Товчлуурууд */
 .answerButton {
-  font-size: 1.3rem;
-  padding: 12px 30px;
+  font-size: clamp(1rem, 4vw, 1.5rem); /* 🔥 */
+  padding: 1vh 5vw;  /* 🔥 */
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -50,7 +50,7 @@ body {
   color: white;
 }
 
-/* Hover эффект зөвхөн YES товч дээр */
+/* Hover */
 #yesButton:hover {
   transform: scale(1.1);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -58,12 +58,13 @@ body {
 
 /* Зураг */
 .responsive {
-  margin-top: 20px;
-  max-width: 80%;
+  margin-top: 3vh;        /* 🔥 */
+  width: 60vw;           /* 🔥 */
+  max-width: 300px;     
   height: auto;
 }
 
-/* Confetti canvas */
+/* Confetti */
 #confettiCanvas {
   position: fixed;
   top: 0;
