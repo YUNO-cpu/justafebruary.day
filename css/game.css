@@ -111,3 +111,18 @@ body.win {
   transform: translateY(-5px);
 }
 
+.subMenu {
+  position: fixed;
+  top: 0;
+  right: -220px;
+  width: 220px;
+  height: 100vh;
+  background: white;
+  transition: 0.4s;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.subMenu.open {
+  right: 0;
+}
