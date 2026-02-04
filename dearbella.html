@@ -61,13 +61,17 @@ const hoverSound = new Audio("audio/hover.mp3");
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
 
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
 }
+
+// Run once now
 resizeCanvas();
 
+// And anytime the window changes size
 window.addEventListener("resize", resizeCanvas);
+
 
 let hearts = [];
 
