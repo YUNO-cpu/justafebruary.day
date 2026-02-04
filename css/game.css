@@ -143,3 +143,8 @@ body.win {
    text-align: right;
    color: #800020;
 }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
