@@ -12,6 +12,8 @@ body.dearbella {
   background-size: 400% 400%;
   animation: bgmove 10s infinite;
   text-align:center;
+  height: 100vh;        /* ЭНЭ ЧУХАЛ */
+  overflow: hidden;    /* ЭНЭ ЧУХАЛ */
 }
 
 @keyframes bgmove {
@@ -24,7 +26,7 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 #gameBoard { 
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;     
 }
 .card { 
   width:95px; 
@@ -82,9 +84,11 @@ h1 { font-size:2.5rem; color:#800020; margin-top:20px;}
 
 #heartCanvas {
   position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
 }
 
 #menuBtn {
