@@ -141,11 +141,16 @@ const layout = [
   [0,0,0,1,1,1,0,0,0],
   [0,0,0,0,1,0,0,0,0],
 ];
-
+   
 function getCardSize(){
   const w = gameBoard.offsetWidth;
   const h = gameBoard.offsetHeight;
-  return Math.min(w/10, h/10); 
+
+  if(w > 1000){ 
+    return 110; // desktop
+  } else {
+    return Math.min(w/9, h/8); // mobile
+  }
 }
 
 function buildBoard(){
