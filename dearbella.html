@@ -60,10 +60,12 @@ const hoverSound = new Audio("audio/hover.mp3");
 // ========== Heart rain canvas ==========
 const canvas = document.getElementById("heartCanvas");
 const ctx = canvas.getContext("2d");
-function resizeCanvas(){
+
+function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
+
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
