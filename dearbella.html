@@ -73,10 +73,6 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 
-// And anytime the window changes size
-window.addEventListener("resize", resizeCanvas);
-
-
 let hearts = [];
 
 function triggerHeartRain(){
@@ -184,6 +180,7 @@ function buildBoard(){
 
   let cardsArray = [...heartImages, ...heartImages];
   shuffle(cardsArray);
+   cardsArray = cardsArray.slice(0, coords.length);
 
   let firstCard=null, secondCard=null, lockBoard=false;
   let matchedCount = 0;
@@ -242,11 +239,12 @@ function buildBoard(){
           secondCard.classList.add("matched");
           matchedCount++;
           resetBoard();
+           
+if(matchedCount === totalPairs){
+  winSequence();
+  triggerHeartRain();
+}
 
-          if(matchedCount === totalPairs){
-            triggerHeartRain();
-            setTimeout(()=>alert("All pairs matched JUST LIKE US"),500);
-          }
 
         } else {
           setTimeout(()=>{
@@ -258,6 +256,10 @@ function buildBoard(){
       }
     });
   });
+
+   card.addEventListener("mouseenter", ()=>{
+  if(soundOn) hoverSound.play();
+});
 
   function resetBoard(){
     [firstCard,secondCard,lockBoard] = [null,null,false];
