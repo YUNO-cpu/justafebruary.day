@@ -50,6 +50,9 @@ FIND THE MATCHES
 <canvas id="heartCanvas"></canvas>
 
 <script>
+
+   let musicStarted = false;
+
    const bgMusic = new Audio("audio/bg.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.4;
@@ -215,9 +218,14 @@ function buildBoard(){
     card.appendChild(inner);
     gameBoard.appendChild(card);
 
-    card.addEventListener("click", ()=>{
-      if(lockBoard) return;
-      if(card===firstCard) return;
+   card.addEventListener("click", ()=>{
+  if(!musicStarted && musicOn){
+    bgMusic.play();
+    musicStarted = true;
+  }
+
+  if(lockBoard) return;
+  if(card===firstCard) return;
 
       card.classList.add("flipped");
 
