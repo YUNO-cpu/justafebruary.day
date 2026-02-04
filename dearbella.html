@@ -244,28 +244,6 @@ function buildBoard(){
   }
 }
 
-  const inner = document.createElement("div");
-  inner.classList.add("card-inner");
-
-  const front = document.createElement("div");
-  front.classList.add("card-front");
-  front.textContent="R";
-
-  const back = document.createElement("div");
-  back.classList.add("card-back");
-  const image = document.createElement("img");
-  image.src = img.src;
-  back.appendChild(image);
-
-  inner.appendChild(front);
-  inner.appendChild(back);
-  card.appendChild(inner);
-  gameBoard.appendChild(card);
-
-  card.addEventListener("click", ()=>{
-    if(lockBoard) return;
-    if(card===firstCard) return;
-
     const romanticSound = new Audio("audio/romantic.mp3");
     romanticSound.currentTime=0;
     romanticSound.play();
