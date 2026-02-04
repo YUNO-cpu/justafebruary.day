@@ -244,55 +244,6 @@ function buildBoard(){
   }
 }
 
-    const romanticSound = new Audio("audio/romantic.mp3");
-    romanticSound.currentTime=0;
-    romanticSound.play();
-
-    card.classList.add("flipped");
-
-    if(!firstCard){
-      firstCard=card;
-    } else {
-      secondCard=card;
-      lockBoard=true;
-
-      if(firstCard.querySelector(".card-back img").src ===
-         secondCard.querySelector(".card-back img").src){
-
-        firstCard.classList.add("matched");
-        secondCard.classList.add("matched");
-        matchedCount++;
-        resetBoard();
-
-
-        // WIN
-      if(matchedCount === totalPairs){
-  setTimeout(()=>{
-    triggerHeartRain();   // зөвхөн энд
-    setTimeout(()=>{
-      alert("All pairs matched JUST LIKE US");
-    },500);
-  },500);
-}
-         document.body.style.transition = "0.3s";
-document.body.style.transform = "scale(1.05)";
-
-
-      } else {
-        setTimeout(()=>{
-          firstCard.classList.remove("flipped");
-          secondCard.classList.remove("flipped");
-          resetBoard();
-        },800);
-      }
-    }
-  });
-});
-
-function resetBoard(){
-  [firstCard,secondCard,lockBoard] = [null,null,false];
-}
-
    const menuBtn = document.getElementById("menuBtn");
 const sideMenu = document.getElementById("sideMenu");
 
