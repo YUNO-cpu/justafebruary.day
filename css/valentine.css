@@ -94,7 +94,7 @@ body {
   }
 
   .answerButton {
-    width: 80%;
+    width: auto;
     font-size: 1.1rem;
   }
 }
