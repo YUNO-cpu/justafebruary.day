@@ -13,50 +13,44 @@ body {
 
 /* Асуулт */
 #valentineQuestion {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(1.5rem, 5vw, 2.5rem); /* 🔥 px → clamp */
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   color: #2c3e50;
-  margin-bottom: 4vh;   /* 🔥 px → vh */
-  text-align: center;
+  margin-bottom: 4vh;
 }
 
+/* Container */
 .container {
   width: 100%;
-  max-width: 420px;   /* утсанд тохиромжтой өргөн */
+  max-width: 420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* YES / NO товч */
+/* YES / NO товч (desktop default) */
 .buttonGroup {
   display: flex;
-  gap: 5vw;
-  position: relative;
-  width: 100%;              /* 🔥 чухал */
-  justify-content: center;  /* 🔥 голлуулна */
+  gap: 20px;
+  justify-content: center;
 }
 
-/* Товчлуурууд */
 .answerButton {
-  font-size: clamp(1rem, 4vw, 1.5rem); /* 🔥 */
-  padding: 1vh 5vw;  /* 🔥 */
+  font-size: 1.2rem;
+  padding: 12px 24px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
 }
 
-/* YES товч */
+/* YES */
 #yesButton {
   background-color: #6fbce6;
   color: white;
-    transition: font-size 0.3s ease, transform 0.25s ease;
 }
 
-/* NO товч */
+/* NO */
 #noButton {
   background-color: #ff8fa3;
   color: white;
@@ -68,14 +62,7 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Зураг */
-.responsive {
-  margin-top: 3vh;        /* 🔥 */
-  width: 60vw;           /* 🔥 */
-  max-width: 300px;     
-  height: auto;
-}
-
+/* Image */
 .heroImg {
   margin-top: 3vh;
   width: 60vw;
@@ -83,7 +70,7 @@ body {
   height: auto;
 }
 
-/* Confetti */
+/* Confetti canvas */
 #confettiCanvas {
   position: fixed;
   top: 0;
@@ -91,4 +78,23 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .answerButton {
+    width: 80%;
+    font-size: 1.1rem;
+  }
 }
