@@ -15,7 +15,7 @@ body {
 #valentineQuestion {
   font-size: clamp(1.5rem, 5vw, 2.5rem);
   color: #2c3e50;
-  margin-bottom: 4vh;
+  margin-bottom: 5vh;
 }
 
 /* Container */
