@@ -87,7 +87,7 @@ body {
   }
 
   .buttonGroup {
-    flex-direction: column;
+    flex-direction: row;
     gap: 12px;
     width: 100%;
     align-items: center;
@@ -95,6 +95,7 @@ body {
 
   .answerButton {
     width: auto;
+    padding: 10px 20px;
     font-size: 1.1rem;
   }
 }
