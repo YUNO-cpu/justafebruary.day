@@ -20,6 +20,15 @@ body {
   text-align: center;
 }
 
+.container {
+  width: 100%;
+  max-width: 420px;   /* утсанд тохиромжтой өргөн */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* YES / NO товч */
 .buttonGroup {
   display: flex;
@@ -64,6 +73,13 @@ body {
   margin-top: 3vh;        /* 🔥 */
   width: 60vw;           /* 🔥 */
   max-width: 300px;     
+  height: auto;
+}
+
+.heroImg {
+  margin-top: 3vh;
+  width: 60vw;
+  max-width: 300px;
   height: auto;
 }
 
